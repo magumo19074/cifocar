@@ -10,7 +10,7 @@
 					</a>
 				</figure>
 				<hgroup>
-					<h1>CIFOCAR Valles</h1>
+					<h1>CIFOCAR Valles </h1>
 					<h2>Concesionario de cohes de seguna mano</h2>
 				</hgroup>
 			</header>
