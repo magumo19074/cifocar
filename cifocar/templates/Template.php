@@ -49,16 +49,32 @@
 			<nav>
 				<ul class="menu">
 					<li><a href="index.php">Inicio</a></li>
-					<li><a href="index.php?controlador=Usuario&operacion=registro">Registro</a></li>
+					<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listar vehiculos</a></li>
+					
 				</ul>
+				<ul class="menu">
 				<?php 
 				//pone el menú del administrador
-				if($usuario && $usuario->admin){	?>
-				<ul class="menu">
-					<li><a href="#">ADMIN</a></li>
-				</ul>
-							
+				if(Login::isAdmin()){	?>
+				
+				<li><a href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a></li>
+				<li><a href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a></li>
+					</ul>		
 				<?php }	?>
+				
+				
+				<?php 
+				//pone el menú del comprador
+				if($usuario && $usuario->privilegio==1){	?>
+				<li><a  href="index.php?controlador=Vehiculo&operacion=nuevo">Nuevo vehiculo</a></li>
+				<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a></li>
+				<li><a  href="index.php?controlador=Marca&operacion=nuevo">Nueva Marca</a></li>
+				<li><a href="index.php?controlador=Marca&operacion=listar">Listado de marcas</a></li>
+				
+				
+					</ul>		
+				<?php }	?>
+				
 			</nav>
 		<?php }
 		
