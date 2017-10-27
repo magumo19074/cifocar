@@ -36,6 +36,17 @@
 				<label>Email:</label>
 				<input type="email" name="email" required="required"/><br/>
 				
+				<label>Administrador</label>
+				<input type="checkbox" name="admin" value="1">Administrador</br>
+				</br>
+				<label>Privilegio:</label>
+					<select name="privilegio">
+						<option value="0">Administrador</option>
+						<option value="1">Responsable de compras</option>
+						<option value="2" selected="selected">Vendedor</option>
+					</select>
+				<br/>
+				
 				<label>Imagen:</label>
 				<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_image_size;?>" />		
 				<input type="file" accept="image/*" name="imagen" />

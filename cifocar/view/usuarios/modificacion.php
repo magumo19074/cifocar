@@ -20,10 +20,7 @@
 		?>
 		
 		<section id="content">
-			<a class="derecha" href="index.php?controlador=Usuario&operacion=baja">
-				<img src="images/buttons/delete.png" alt="darse de baja" class="logo" />
-				Darse de baja
-			</a>
+			
 			
 			<h2>Formulario de modificación de datos</h2>
 			
@@ -54,6 +51,8 @@
 				<label>Email:</label>
 				<input type="email" name="email" required="required" 
 					value="<?php echo $usuario->email;?>"/><br/>
+					
+				
 				
 				<label>Nueva imagen:</label>
 				<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_image_size;?>" />		

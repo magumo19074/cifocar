@@ -1,14 +1,14 @@
 <?php
 	class UsuarioModel{
 		//PROPIEDADES
-		public $id, $user, $password, $nombre, $privilegio=100, $admin=0, $email, $imagen='', $fecha;
+		public $id, $user, $password, $nombre, $privilegio, $admin=0, $email, $imagen='', $fecha;
 			
 		//METODOS
 		//guarda el usuario en la BDD
 		public function guardar(){
 			$user_table = Config::get()->db_user_table;
 			$consulta = "INSERT INTO $user_table(user, password, nombre, privilegio, admin, email, imagen)
-			VALUES ('$this->user','$this->password','$this->nombre',100,0,'$this->email', '$this->imagen');";
+			VALUES ('$this->user','$this->password','$this->nombre',$this->privilegio,$this->admin,'$this->email', '$this->imagen');";
 				
 			return Database::get()->query($consulta);
 		}
@@ -24,6 +24,17 @@
 							  		imagen='$this->imagen'
 							  WHERE user='$this->user';";
 			return Database::get()->query($consulta);
+		}
+		
+		//ACTUALIZA LOS DATOS DEL USUARIO EN LA BDD SI ES ADMIN
+		public function actualizaradmin(){
+		    $user_table = Config::get()->db_user_table;
+		    $consulta = "UPDATE $user_table
+							  SET   privilegio=$this->privilegio,
+                                    admin=$this->admin,email='$this->email',
+							  		imagen='$this->imagen'
+							  WHERE user='$this->user';";
+		    return Database::get()->query($consulta);
 		}
 		
 		
@@ -60,5 +71,45 @@
 			
 			return $us;
 		}	
-	}
+
+	
+		//método que me recupera el total de registros (incluso con filtros)
+		public static function getTotal($t='', $c='nombre'){
+		    $consulta = "SELECT * FROM usuarios
+                         WHERE $c LIKE '%$t%'";
+		    
+		    $conexion = Database::get();
+		    $resultados = $conexion->query($consulta);
+		    $total = $resultados->num_rows;
+		    $resultados->free();
+		    return $total;
+		}
+		
+		//método que me recupere todos los usuarios
+		//PROTOTIPO: public static array<RecetaModel> getRecetas()
+		public static function getUsuarios($l=10, $o=0, $t='', $c='nombre', $co='id', $so='ASC'){
+		    //preparar la consulta
+		    $consulta = "SELECT * FROM usuarios
+                         WHERE $c LIKE '%$t%'
+                         ORDER BY $co $so
+		                 LIMIT $l
+		                 OFFSET $o;";
+		    
+		    //conecto a la BDD y ejecuto la consulta
+		    $conexion = Database::get();
+		    $resultados = $conexion->query($consulta);
+		    
+		    //creo la lista de RecetaModel
+		    $lista = array();
+		    while($usuario = $resultados->fetch_object('UsuarioModel'))
+		        $lista[] = $usuario;
+		        
+		        //liberar memoria
+		        $resultados->free();
+		        
+		        //retornar la lista de RecetaModel
+		        return $lista;
+		}
+	
+		}
 ?>
