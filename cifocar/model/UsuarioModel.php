@@ -31,7 +31,8 @@
 		    $user_table = Config::get()->db_user_table;
 		    $consulta = "UPDATE $user_table
 							  SET   privilegio=$this->privilegio,
-                                    admin=$this->admin,email='$this->email',
+                                    admin=$this->admin,
+                                    email='$this->email',
 							  		imagen='$this->imagen'
 							  WHERE user='$this->user';";
 		    return Database::get()->query($consulta);

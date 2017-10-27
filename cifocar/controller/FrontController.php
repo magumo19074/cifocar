@@ -19,6 +19,19 @@
 				//comprueba si me hacen login o logout y recupera el usuario activo
 				Login::comprobar();
 				
+				// si me hacen logout borro los parametros para que
+				//el controlador y metodo por defecto me lleven a la portada
+				if(!empty($_POST['logout'])){
+				    unset($_GET);
+				  /*  //preparar datos para la vista
+				    $datos=array();
+				    $datos['usuario']=null;
+				    //catgar la vista
+				    $this->load_view('view/welcome_message',$datos); */
+				    
+				    
+				}
+				
 				//GESTION DE PETICIONES (invocar el controlador adecuado)
 				//las peticiones serán en formato: 
 				//index.php?controlador=Usuario&operacion=registro
