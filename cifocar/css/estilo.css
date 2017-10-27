@@ -162,7 +162,7 @@ nav ul.menu>li:hover{
 
 #content table{
 	margin: auto;
-	width: 90%;
+	width: 100%;
 }
 
 #content table th{
@@ -172,17 +172,30 @@ nav ul.menu>li:hover{
 	font-weight: bold;
 }
 #content table td, #content table th{
-	padding: 10px;
+	padding: 2px;
 }
 #content table tr:nth-of-type(even){
 	background-color: #eef;
+}
+
+#content table tr:nth-of-type(odd){
+	background-color: white;
+}
+
+#content table td.foto{
+	text-align: center;
+}
+
+#content table .boton{
+	height: 20px;
+	width: 20px;
 }
 
 #content form input{
 	margin-top: 5px;
 	padding: 4px;
 }
-#content form label{
+#content form:not(.filtro) label{
 	display: inline-block;
 	min-width: 140px;
 }
@@ -194,6 +207,15 @@ nav ul.menu>li:hover{
 	float: right;
 }
 
+#content form.filtro{
+	text-align: right;
+	padding: 2px;	
+}
+
+#content form.filtro label{
+	color: orange;
+	font-style: italic;
+}
 
 /* FOOTER */
 footer{
