@@ -135,7 +135,7 @@
 		    $this->load('model/VehiculoModel.php');
 		    $vehiculo = VehiculoModel::getVehiculo($id);
 		    
-		    //comprobar que la receta existe
+		    //comprobar que el vehiculo existe
 		    if(!$vehiculo)
 		        throw new Exception('No existe el vehiculo con código '.$id);
 		    
