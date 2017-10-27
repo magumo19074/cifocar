@@ -2,7 +2,7 @@
 	//CONTROLADOR VEHICULO
 	class Vehiculo extends Controller{
 
-		//PROCEDIMIENTO PARA GUARDAR UN NUEVO VEHICULO
+		//PROCEDIMIENTO PARA GUARDAR UN NUEVO VEHI
 		public function nueva(){
 		    //comprobar si eres administrador
 		    if(!Login::isAdmin())
