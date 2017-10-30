@@ -44,9 +44,6 @@
 				<label>Caballos:</label>
 				<input type="number" name="caballos" required="required"/><br/>
 				
-				<label>Fecha de venta:</label>
-				<input type="date" name="fecha_venta"/><br/>
-				
 				<label>Estado:</label>
 				<select name="estado">
 					<option value=0>en venta</option>
@@ -65,11 +62,14 @@
 				<label>Imagen:</label>
 				<input type="file" name="imagen" accept="image/*" required="required"/><br>
 				
-				<label>Vendedor:</label>
-				<input type="number" name="vendedor" /><br/>
-				
-				<label>Marca:</label>
-				<input type="text" name="marca" required="required"/><br/>
+				<label>Marca:</label>			
+					<select name="marca">
+						<?php foreach ($marcas as $m){
+                            echo "<option value='$m->marca'>$m->marca</option>";
+    
+                        }?>
+                        </select>
+                    <br/>   
 				
 				<input type="submit" name="guardar" value="guardar"/><br/>
 			</form>

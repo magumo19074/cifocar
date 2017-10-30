@@ -11,9 +11,16 @@
 
 			//si no llegan los datos a guardar
 			if(empty($_POST['guardar'])){
+			   
+			    //Para llenar el desplegable de las marcas
+			    $this->load('model/MarcaModel.php');
+			  
+			    $marcas = MarcaModel::getMarcas();
+		 
 				//mostramos la vista del formulario
 				$datos = array();
 				$datos['usuario'] = Login::getUsuario();
+				$datos['marcas'] = $marcas;
 				$this->load_view('view/vehiculos/nueva.php', $datos);
 			
 			//si llegan los datos por POST
@@ -32,11 +39,11 @@
 				$vehiculo->precio_compra = intval($_POST['precio_compra']);
 				$vehiculo->kms = intval($_POST['kms']);
 				$vehiculo->caballos = intval($_POST['caballos']);
-				$vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
+				//$vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
 				$vehiculo->estado = intval($_POST['estado']);
 				$vehiculo->any_matriculacion = intval($_POST['any_matriculacion']);
 				$vehiculo->detalles = $conexion->real_escape_string($_POST['detalles']);
-				$vehiculo->vendedor = intval($_POST['vendedor']);
+			//	$vehiculo->vendedor = intval($_POST['vendedor']);
 				$vehiculo->marca = $conexion->real_escape_string($_POST['marca']);
 			
 				//recuperar el fichero
@@ -265,8 +272,6 @@
 		                    $vehiculo->vendedor=Login::getUsuario()->id;
 		                }
 		                
-		                var_dump(date_format(new DateTime(), 'Y-m-d'));
-		                var_dump($vehiculo->fecha_venta);
 		                //modificar el estado del vehiculo 
 		                //y si se ha vendido poner poner la fecha de venta del sistema en la BDD
 		                if(!$vehiculo->actualizarestado())

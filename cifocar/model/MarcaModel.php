@@ -33,9 +33,10 @@
 		    //preparar la consulta
 		    $consulta = "SELECT * FROM marcas
                          WHERE marca LIKE '%$texto%'
-                         ORDER BY marca $sentido
-		                 LIMIT $l
-		                 OFFSET $o;";
+                         ORDER BY marca $sentido ";
+		    
+		    if($l>0) $consulta.= "LIMIT $l";
+		    if($o>0) $consulta.= "OFFSET $o";
 		    
 		    //conecto a la BDD y ejecuto la consulta
 		    $conexion = Database::get();
