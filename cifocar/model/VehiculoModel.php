@@ -12,12 +12,11 @@ class VehiculoModel{
         $conexion = Database::get();
         
         //preparar la consulta de inserción
-        $consulta = "INSERT INTO vehiculos (modelo, matricula, detalles,precio_venta,imagen,precio_compra,kms,caballos,estado,any_matriculacion,marca,color)
+        $consulta = "INSERT INTO vehiculos (modelo, matricula, detalles,imagen,precio_compra,kms,caballos,estado,any_matriculacion,marca,color)
                     VALUES (
                     '$this->modelo', 
                     '$this->matricula', 
                      '$this->detalles',
-                    $this->precio_venta,
                     '$this->imagen',
                     $this->precio_compra,
                     $this->kms,
@@ -103,7 +102,6 @@ class VehiculoModel{
 						  	  precio_compra=$this->precio_compra,
                               kms=$this->kms,
                               caballos=$this->caballos,
-                              fecha_venta='$this->fecha_venta',
                               estado=$this->estado,
                               any_matriculacion=$this->any_matriculacion,
                               detalles='$this->detalles',

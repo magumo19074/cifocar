@@ -32,9 +32,6 @@
 				<label>Color:</label>
 				<input type="text" name="color" required="required"/><br/>
 				
-				<label>Precio de venta:</label>
-				<input type="number" name="precio_venta" required="required"/><br/>
-				
 				<label>Precio de compra:</label>
 				<input type="number" name="precio_compra" required="required"/><br/>
 				

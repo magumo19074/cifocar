@@ -54,14 +54,10 @@
 					<input type="number" name="caballos" required="required"
 					value="<?php echo $vehiculo->caballos;?>" /><br/>
 				
-					<label>Fecha de venta:</label>
-					<input type="date" name="fecha_venta"
-					value="<?php echo $vehiculo->fecha_venta;?>" /><br/>
-				
 					<label>Estado:</label>
 					<select name="estado">
-						<option value=0 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>en venta</option>
-						<option value=1 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>reservado</option>
+						<option value=0 <?php if($vehiculo->estado==0) echo "selected='selected'";?>>en venta</option>
+						<option value=1 <?php if($vehiculo->estado==1) echo "selected='selected'";?>>reservado</option>
 						<option value=2 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>vendido</option>
 						<option value=3 <?php if($vehiculo->estado==3) echo "selected='selected'";?>>devolución</option>
 						<option value=4 <?php if($vehiculo->estado==4) echo "selected='selected'";?>>baja</option>
@@ -81,10 +77,20 @@
 					<label>Vendedor:</label>
 					<input type="number" name="vendedor"
 					value="<?php echo $vehiculo->vendedor;?>" /><br/>
-				
-					<label>Marca:</label>
-					<input type="text" name="marca" required="required"
-					value="<?php echo $vehiculo->marca;?>" /><br/>    				
+					
+					<label>Marca:</label>			
+					<select name="marca">
+						<?php foreach ($marcas as $m){
+     //                       echo "<option value='$m->marca'>$m->marca</option>";
+						    echo "<option value='$m->marca' ";
+						    if($vehiculo->marca==$m->marca) echo "selected='selected' ";
+						    echo ">$m->marca</option>";
+    
+                        }?>
+                        </select>
+                    <br/>   
+					
+					<br/>    				
     				
     				<input type="submit" name="modificar" value="modificar"/><br/>
     			</form>

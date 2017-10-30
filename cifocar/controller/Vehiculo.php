@@ -35,7 +35,7 @@
 				$vehiculo->matricula = $conexion->real_escape_string($_POST['matricula']);
 				$vehiculo->modelo = $conexion->real_escape_string($_POST['modelo']);
 				$vehiculo->color = $conexion->real_escape_string($_POST['color']);
-				$vehiculo->precio_venta = intval($_POST['precio_venta']);
+				//$vehiculo->precio_venta = intval($_POST['precio_venta']);
 				$vehiculo->precio_compra = intval($_POST['precio_compra']);
 				$vehiculo->kms = intval($_POST['kms']);
 				$vehiculo->caballos = intval($_POST['caballos']);
@@ -172,7 +172,11 @@
 		    
 		    //comprobar que existe la receta
 		    if(!$vehiculo)
-		        throw new Exception('No existe el vehiculo');   
+		        throw new Exception('No existe el vehiculo'); 
+		        
+	           //Para llenar el desplegable de las marcas
+		        $this->load('model/MarcaModel.php');
+		        $marcas = MarcaModel::getMarcas();		        
 		    
 		    //si no me están enviando el formulario
 		    if(empty($_POST['modificar'])){
@@ -180,6 +184,7 @@
 		        $datos = array();
 		        $datos['usuario'] = Login::getUsuario();
 		        $datos['vehiculo'] = $vehiculo;
+		        $datos['marcas'] = $marcas;
 		        $this->load_view('view/vehiculos/modificarvehiculo.php', $datos);
 
 		    }else{
@@ -263,8 +268,7 @@
 		                //en caso contrario
 		                $conexion = Database::get();
 		                //actualizar los campos del vehiculo con los datos POST
-		              //  $vehiculo->precio_venta = intval($_POST['precio_venta']);
-		              //  $vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
+		                $vehiculo->precio_venta = intval($_POST['precio_venta']);
 		                $vehiculo->estado = intval($_POST['estado']);
 		               	
 		                if ($vehiculo->estado==2){

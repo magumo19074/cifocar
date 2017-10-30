@@ -28,16 +28,20 @@
     				
     				<label>Estado:</label>
 					<select name="estado">
-						<option value=0 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>en venta</option>
-						<option value=1 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>reservado</option>
+						<option value=0 <?php if($vehiculo->estado==0) echo "selected='selected'";?>>en venta</option>
+						<option value=1 <?php if($vehiculo->estado==1) echo "selected='selected'";?>>reservado</option>
 						<option value=2 <?php if($vehiculo->estado==2) echo "selected='selected'";?>>vendido</option>
 						<option value=3 <?php if($vehiculo->estado==3) echo "selected='selected'";?>>devolución</option>
 						<option value=4 <?php if($vehiculo->estado==4) echo "selected='selected'";?>>baja</option>
 					</select><br/>
+					
+					<label>Precio de venta:</label>
+					<input type="number" name="precio_venta" required="required"
+					value="<?php echo $vehiculo->precio_venta;?>" /><br/>
 
     				<input type="submit" name="modificar" value="modificar"/><br/>
     			</form>
-    			
+    			<br/>
     			<div class="imagen">
         			<figure>
             			<?php 
