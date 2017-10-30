@@ -5,38 +5,23 @@
 	última revisión: 06/11/2016
 */
 
-#borrar{
-	background-color: grey;
-color:white;
-	border-style: hidden;
-	border-radius:  10px;
-}
+
 
 /* ------------------------------------------------------------------------------------
-RESET DE ESTILO Y REGLAS GENERALES 
+RESET DE ESTILO Y REGLAS GENERALES n
 ------------------------------------------------------------------------------------ */
 *{
 	margin: 0px;
 	padding: 0px;
 }
 
-.izquierda{
-	float: left;
-}
-
-.derecha{
-	float: right;
-}
-
-.clear{
-	clear: both;
-}
-.mini{
-	font-size: 0.8em;
-}
-.maxi{
-	font-size: 1.2em;
-}
+.izquierda{float: left;}
+.derecha{float: right;}
+.clear{clear: both;}
+.mini{font-size: 0.8em;}
+.maxi{font-size: 1.2em;}
+.exito{color: #3a3;}
+.error{color: #a33;}
 
 h1, h2, h3{
 	margin: 10px 0px 10px 0px;
@@ -57,24 +42,7 @@ img.logo{
 	width: 30px;
 	vertical-align: middle;
 }
-.imagen{
-	height: 50px;
-	width: 50px;
-	
-}
 
-.bottonform{
-	border-radius:2px;
-	border:none;
-	padding:2px;
-	color:white;
-	background-color:navy;
-}
-.bottonform:hover{
-	color:navy;
-	background-color:white;
-	cursor:pointer;
-}
 /* ------------------------------------------------------------------------------------
 INICIO DE LOS ESTILOS PARA CADA UNO DE LOS ELEMENTOS 
 ------------------------------------------------------------------------------------ */
@@ -89,35 +57,15 @@ body{
 	width: 80%;
 	padding: 2%;
 	margin: 10px auto 10px auto;
-	box-shadow: 0px 0px 8px rgba(60,60,60,0.6);	
+	box-shadow: 0px 0px 4px rgba(60,60,60,0.6);	
 }
 
-.caratula{
-	border:solid 2px grey;
-	height:250px;
-	width:150px;
-  margin-top:60px;
-}
 
-.caratulaportada{
-	
-	height:150px;
-	width:250px;
-	margin-top:10px;
-}
-#imagenjuego{
-	 margin-right:40px;
-	 
-}
-
-#imagenportada{
-	margin-right: 40px;
-}
 /* HEADER */
 header{
 	padding: 20px;
-	background-image:url('../images/fondo/fondo.jpg');
-	color: blanchedalmond;
+	background-color: #eef;
+	color: white;
 	text-shadow: 1px 1px 3px #99a;
 }
 
@@ -126,7 +74,10 @@ header{
 }
 
 header h1{
-	font-size: 3em;	
+	font-size: 3vw;	
+}
+header h2{
+	font-size: 2vw;	
 }
 
 header figure{
@@ -168,19 +119,13 @@ header hgroup{
 	font-weight: bold;
 }
 
-.botologin{
-	border-bottom-style: hidden;
-	border-radius: 6px;
-	border:0px;
-}
 
 /* BARRA DE NAVEGACION */
 nav{
-	background-color:#aaf;
+	background-color: #aaf;
 	color: white;
 	display: flex;
-	border: solid 1px;
-	border-radius: 4px;
+	border: solid 2px #aaf;
 }
 
 nav ul{
@@ -215,34 +160,65 @@ nav ul.menu>li:hover{
 	text-align: justify;
 }
 
+#content p.volver{
+	cursor:pointer;
+	text-align: center;
+	margin: 20px;
+	color: brown;
+	font-weight: bold;
+	width: 100%;
+}
+
+#content h1, #content h2{
+	color: orange;
+}
+
 #content table{
 	margin: auto;
-	width: 90%;
+	width: 100%;
 }
 
 #content table th{
 	color: white;
-	background-color: cadetblue;
+	background-color: blue;
 	text-align: center;
 	font-weight: bold;
 }
 #content table td, #content table th{
-	padding: 10px;
+	padding: 2px;
 }
 #content table tr:nth-of-type(even){
 	background-color: #eef;
 }
+
+#content table tr:nth-of-type(odd){
+	background-color: white;
+}
+
+#content table td.foto{
+	text-align: center;
+}
+
+#content table img.miniatura{
+	height: 20px;
+	width: 20px;
+	border:solid 2px orange;
+}
+
 #content table .boton{
-	width: 30px;
-	height:30px;
-	display:block;
-	margin:auto;
-	}
+	height: 20px;
+	width: 20px;
+}
+
+#content form{
+	padding: 10px;
+}
+
 #content form input{
 	margin-top: 5px;
 	padding: 4px;
 }
-#content form label{
+#content form:not(.filtro) label{
 	display: inline-block;
 	min-width: 140px;
 }
@@ -254,13 +230,14 @@ nav ul.menu>li:hover{
 	float: right;
 }
 
-#content p.volver{
-	cursor:pointer;
-	text-align: center;
-	margin: 20px;
-	color: brown;
-	font-weight: bold;
-	width: 100%;
+#content form.filtro{
+	text-align: right;
+	padding: 2px;	
+}
+
+#content form.filtro label{
+	color: orange;
+	font-style: italic;
 }
 
 #content .contenedor{
@@ -273,24 +250,58 @@ nav ul.menu>li:hover{
 	background-color: white;
 	padding: 3%;
 	margin: 10px 3% 10px 0%;
-	box-shadow: 0px 0px 4px grey;
+	box-shadow: 0px 0px 4px orange;
 }
 
 #content .contenedor .imagen{
 	flex: 2;
 	text-align: center;
 }
+
 #content p.infolista{
 	color: brown;
 	font-style: italic;
 	margin: 10px 0px 10px 0px;
 }
 
+#content ul.paginacion li{
+	display: inline-block;
+	background-color: orange;
+	color: white;
+	padding: 5px;
+	transition: 0.5s;
+}
+
+#content ul.paginacion li:hover{
+	background-color: white;
+	color: orange;
+	box-shadow: 0px 0px 2px orange;
+}
+
+#content ul.paginacion{
+	margin-top: 5px;
+	text-align: right;
+}
+#content ul.paginacion li:not(:first-of-type){
+	border-left: solid 3px white;
+}
+
+#content .contenedor .imagen img:not(.boton){
+	width: 80%;
+	margin: 10px;
+	border: solid 4px white;
+}
+
+#content .contenedor .imagen figcaption{
+	font-size: 0.9em;
+	font-style: italic;
+}
+
 /* FOOTER */
 footer{
 	padding: 20px;
-	background-color: aliceblue;
-	background-radius:3px;
+	background-color: #eef;
+	
 	background-image: url('../images/logos/wide.png');
 	background-repeat: no-repeat;
 	background-size: 40%;

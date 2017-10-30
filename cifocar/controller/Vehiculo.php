@@ -3,16 +3,24 @@
 	class Vehiculo extends Controller{
 
 		//PROCEDIMIENTO PARA GUARDAR UN NUEVO VEHI
-		public function nueva(){
-		    //comprobar si eres administrador
-		    if(!Login::isAdmin())
-		        throw new Exception('Debes ser ADMIN');
+		public function nuevo(){
+		   
+		    //comprobar si eres comprador
+		    if(!Login::getUsuario() || Login::getUsuario()->privilegio!=1)
+		        throw new Exception('Debes ser responsable de compras');
 
 			//si no llegan los datos a guardar
 			if(empty($_POST['guardar'])){
+			   
+			    //Para llenar el desplegable de las marcas
+			    $this->load('model/MarcaModel.php');
+			  
+			    $marcas = MarcaModel::getMarcas();
+		 
 				//mostramos la vista del formulario
 				$datos = array();
 				$datos['usuario'] = Login::getUsuario();
+				$datos['marcas'] = $marcas;
 				$this->load_view('view/vehiculos/nueva.php', $datos);
 			
 			//si llegan los datos por POST
@@ -31,11 +39,11 @@
 				$vehiculo->precio_compra = intval($_POST['precio_compra']);
 				$vehiculo->kms = intval($_POST['kms']);
 				$vehiculo->caballos = intval($_POST['caballos']);
-				$vehiculo->fecha_venta = intval($_POST['fecha_venta']);
+				//$vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
 				$vehiculo->estado = intval($_POST['estado']);
 				$vehiculo->any_matriculacion = intval($_POST['any_matriculacion']);
 				$vehiculo->detalles = $conexion->real_escape_string($_POST['detalles']);
-				$vehiculo->vendedor = $conexion->real_escape_string($_POST['vendedor']);
+			//	$vehiculo->vendedor = intval($_POST['vendedor']);
 				$vehiculo->marca = $conexion->real_escape_string($_POST['marca']);
 			
 				//recuperar el fichero
@@ -117,9 +125,9 @@
 		    $datos['totalRegistros'] = $totalRegistros;
 		    $datos['regPorPagina'] = $num;
 		    
-		    if(Login::isAdmin())
-		      $this->load_view('view/vehiculos/lista_admin.php', $datos);
-		    else
+		  //  if(Login::isAdmin())
+		  //    $this->load_view('view/vehiculos/lista_admin.php', $datos);
+		  //  else
 		      $this->load_view('view/vehiculos/lista.php', $datos);
 		}
 		
@@ -149,10 +157,11 @@
 		
 		//PROCEDIMIENTO PARA EDITAR UN VEHICULO
 		public function editar($id=0){
-		    //comprobar que el usuario es admin
-		    if(!Login::isAdmin())
-		        throw new Exception('Debes ser admin');
 		    
+		    //comprobar si eres comprador
+		    if(!Login::getUsuario() || Login::getUsuario()->privilegio!=1)
+		        throw new Exception('Debes ser responsable de compras');
+		          
 		    //comprobar que me llega un id
 		    if(!$id)
 		        throw new Exception('No se indicó la id del vehiculo');
@@ -171,7 +180,7 @@
 		        $datos = array();
 		        $datos['usuario'] = Login::getUsuario();
 		        $datos['vehiculo'] = $vehiculo;
-		        $this->load_view('view/vehiculos/modificar.php', $datos);
+		        $this->load_view('view/vehiculos/modificarvehiculo.php', $datos);
 
 		    }else{
 		    //en caso contrario
@@ -184,11 +193,11 @@
 		      $vehiculo->precio_compra = intval($_POST['precio_compra']);
 		      $vehiculo->kms = intval($_POST['kms']);
 		      $vehiculo->caballos = intval($_POST['caballos']);
-		      $vehiculo->fecha_venta = intval($_POST['fecha_venta']);
+		      $vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
 		      $vehiculo->estado = intval($_POST['estado']);
 		      $vehiculo->any_matriculacion = intval($_POST['any_matriculacion']);
 		      $vehiculo->detalles = $conexion->real_escape_string($_POST['detalles']);
-		      $vehiculo->vendedor = $conexion->real_escape_string($_POST['vendedor']);
+		      $vehiculo->vendedor = intval($_POST['vendedor']);
 		      $vehiculo->marca = $conexion->real_escape_string($_POST['marca']);
 		      		      
 		      //tratamiento de la imagen
@@ -210,8 +219,7 @@
 		          unlink($fotoAntigua);
 		      }
 		      
-		      
-		      //modificar la receta en la BDD
+		      //modificar el vehiculo en la BDD
 		      if(!$vehiculo->actualizar())
 		          throw new Exception('No se pudo actualizar');
 		      
@@ -222,6 +230,60 @@
 	          $this->load_view('view/exito.php', $datos);
 		    }
 		}
+		
+		
+		//PROCEDIMIENTO PARA EDITAR EL ESTADO DE UN VEHICULO
+		public function editarestado($id=0){
+		  
+		      //comprobar si eres vendedor
+		      if(!Login::getUsuario() || Login::getUsuario()->privilegio!=2)
+		          throw new Exception('Debes ser vendedor');
+		    
+		    //comprobar que me llega un id
+		    if(!$id)
+		        throw new Exception('No se indicó la id del vehiculo');
+		        
+		        //recuperar el vehiculo con esa id
+		        $this->load('model/VehiculoModel.php');
+		        $vehiculo = VehiculoModel::getVehiculo($id);
+		        
+		        //comprobar que existe el vehiculo
+		        if(!$vehiculo)
+		            throw new Exception('No existe el vehiculo');
+		            
+		            //si no me están enviando el formulario
+		            if(empty($_POST['modificar'])){
+		                //poner el formulario
+		                $datos = array();
+		                $datos['usuario'] = Login::getUsuario();
+		                $datos['vehiculo'] = $vehiculo;
+		                $this->load_view('view/vehiculos/modificarestado.php', $datos);
+		                
+		            }else{
+		                //en caso contrario
+		                $conexion = Database::get();
+		                //actualizar los campos del vehiculo con los datos POST
+		              //  $vehiculo->precio_venta = intval($_POST['precio_venta']);
+		              //  $vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
+		                $vehiculo->estado = intval($_POST['estado']);
+		               	
+		                if ($vehiculo->estado==2){
+		                    $vehiculo->fecha_venta = date_format(new DateTime(), 'Y-m-d h:m:s');
+		                    $vehiculo->vendedor=Login::getUsuario()->id;
+		                }
+		                
+		                //modificar el estado del vehiculo 
+		                //y si se ha vendido poner poner la fecha de venta del sistema en la BDD
+		                if(!$vehiculo->actualizarestado())
+		                    throw new Exception('No se pudo actualizar');
+		                    
+		                //cargar la vista de éxito
+		                $datos = array();
+		                $datos['usuario'] = Login::getUsuario();
+		                $datos['mensaje'] = "Datos del vehiculo <a href='index.php?controlador=Vehiculo&operacion=ver&parametro=$vehiculo->id'>'$vehiculo->modelo'</a> actualizados correctamente.";
+		                $this->load_view('view/exito.php', $datos);
+		            }
+		  }      
 		
 		//PROCEDIMIENTO PARA BORRAR UNA RECETA
 		public function borrar($id=0){
@@ -248,7 +310,7 @@
 		      $datos = array();
 		      $datos['usuario'] = Login::getUsuario();
 		      $datos['vehiculo'] = $vehiculo; 
-		      $this->load_view('view/vehiculos/confirmarborrado.php', $datos);
+		      $this->load_view('view/vehiculos/borrarvehiculo.php', $datos);
 		   
 		   //si me envian el formulario...
 		   }else{
