@@ -41,6 +41,7 @@
 					<option value="any_matriculacion">año matriculación</option>
 					<option value="caballos">caballos</option>
 					<option value="kms">kms</option>
+					<option value="precio_venta">precio de venta</option>
 				</select>
 				<select name="sentidoOrden">
 					<option value="ASC">ascendente</option>
@@ -61,8 +62,12 @@
 					<th>Marca</th>
 					<th>Modelo</th>
 					<th>Matricula</th>
+					<th>Año</th>
+					<th>Caballos</th>
+					<th>Kms</th>
 					<th>Estado</th>
 					<th>Color</th>
+					<th>Precio de Venta</th>
 					<th colspan="2">Operaciones</th>
 				</tr>
 				<?php 
@@ -72,8 +77,20 @@
 				        echo "<td>$vehiculo->marca</td>";			      
 				        echo "<td>$vehiculo->modelo</td>";
 				        echo "<td>$vehiculo->matricula</td>";
-				        echo "<td>$vehiculo->estado</td>";
+				        echo "<td>$vehiculo->any_matriculacion</td>";
+				        echo "<td>$vehiculo->caballos</td>";
+				        echo "<td>$vehiculo->kms</td>";
+				        echo "<td>";
+			             switch($vehiculo->estado){
+			             case 0: echo 'en venta=0'; break;
+			             case 1: echo 'reservado'; break;
+			             case 2: echo 'vendido'; break;
+			             case 3: echo 'devolucion'; break;
+			             case 4: echo 'baja'; break;
+			             }
+				         echo "</td>";
 				        echo "<td>$vehiculo->color</td>";
+				        echo "<td>$vehiculo->precio_venta</td>";
 				        
 				        echo "<td class='foto'><a href='index.php?controlador=Vehiculo&operacion=ver&parametro=$vehiculo->id'>
                         <img class='boton' src='images/buttons/view.png' alt='ver detalles' title='ver detalles'/></a></td>";
