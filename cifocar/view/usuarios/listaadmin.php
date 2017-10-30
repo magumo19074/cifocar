@@ -41,7 +41,13 @@
 			    
 			     echo "<td style='text-align:center'>$usuario->nombre</td>";
 			     echo "<td style='text-align:right'>".$usuario->email."</td>";
-			     echo "<td style='text-align:center'>$usuario->privilegio</td>";
+			     echo "<td style='text-align:center'>";
+			     switch($usuario->privilegio){
+			         case 0: echo 'Administrador'; break;
+			         case 1: echo 'Responsable compras'; break;
+			         case 2: echo 'Vendedor'; break;
+			     }
+			     echo "</td>";
 			     echo "<td style='text-align:center'>$usuario->admin</td>";
 			     
 			    
