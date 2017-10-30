@@ -260,11 +260,12 @@
 		              //  $vehiculo->fecha_venta= $conexion->real_escape_string($_POST['fecha_venta']);
 		                $vehiculo->estado = intval($_POST['estado']);
 		               	
-		                if ($vehiculo->estado==2)
-		                    $vehiculo->fecha_venta = getdate($time());
-		                    $vehiculo->vendedor=$datos->id;
+		                if ($vehiculo->estado==2){
+		                    $vehiculo->fecha_venta = date_format(new DateTime(), 'Y-m-d h:m:s');
+		                    $vehiculo->vendedor=Login::getUsuario()->id;
+		                }
 		                
-		                    var_dump($vehiculo->estado);
+		                var_dump(date_format(new DateTime(), 'Y-m-d'));
 		                var_dump($vehiculo->fecha_venta);
 		                //modificar el estado del vehiculo 
 		                //y si se ha vendido poner poner la fecha de venta del sistema en la BDD
