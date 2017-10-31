@@ -6,11 +6,12 @@
 			<header>
 				<figure>
 					<a href="index.php">
-						<img alt="car logo" src="images/logos/coche.png" /></a>
+						<img alt="Robs Micro Framework logo" src="images/logos/logo2.png" />
+					</a>
 				</figure>
 				<hgroup>
-					<h1 class="color">CIFOCAR VALLES</h1>
-				
+					<h1>CIFOCAR VALLES</h1>
+					<h2>Tu concesionario se segunda mano del Valles</h2>
 				</hgroup>
 			</header>
 		<?php }
@@ -18,18 +19,12 @@
 		
 		//PONE EL FORMULARIO DE LOGIN
 	    public static function login(){?>
-	    
-	    <div class="formlog" style="text-align: center;margin-right:20px">
-	    	
-	    	<form method="post" id="logino" autocomplete="off">
-				<label>User:</label><input type="text" name="user" required="required" /><br/>
-				<label>Password:</label><input type="password" name="password" required="required"/><br/>
+			<form method="post" id="login" autocomplete="off">
+				<label>User:</label><input type="text" name="user" required="required" />
+				<label>Password:</label><input type="password" name="password" required="required"/>
 				<input class="botologin" type="submit" name="login" value="Login" />
 				
 			</form>
-	    
-	    </div>
-			
 		<?php }
 		
 		
@@ -61,17 +56,17 @@
 			
 		<section class="menuadmin">
 		
-			
+			<div style="text-align: center">
 			
 			<a class="menuinici" href="index.php">Inicio</a>
-			<section > 
+			<!-- <ul class="menu"> -->
 				<?php 
 				//pone el menú del administrador
 				    if($usuario && $usuario->admin){	?>
 					<a  class="menuinici" href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
 					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a>
 					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a>
-			</section>		
+				<!-- </ul> -->		
 				<?php }	?>
 				
 				
@@ -107,7 +102,10 @@
 		public static function footer(){	?>
 			<footer>
 				
-			
+			<p> 
+				<img class="logo" alt="logo web" src="images/logos/logo2.png" />
+				<a href="mailto:magumo19074@gmail.com">Contacto</a>. 
+         		</p>
 			</footer>
 		<?php }
 	}
