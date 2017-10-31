@@ -6,24 +6,26 @@
 			<header>
 				<figure>
 					<a href="index.php">
-						<img alt="Robs Micro Framework logo" src="images/logos/logo2.png" />
+						<h1 style="margin-right:100px;padding-top:10px;" >CIFOCAR Valles</h1>
 					</a>
+					
+						<!--<img alt="Robs Micro Framework logo" src="images/logos/coche2.png" />  -->
+					
 				</figure>
 				<hgroup>
-					<h1>CIFOCAR VALLES</h1>
-					<h2>Tu concesionario se segunda mano del Valles</h2>
+					
+				
 				</hgroup>
 			</header>
 		<?php }
 		
 		
 		//PONE EL FORMULARIO DE LOGIN
-	    public static function login(){?>
+		public static function login(){?>
 			<form method="post" id="login" autocomplete="off">
-				<label>User:</label><input type="text" name="user" required="required" />
-				<label>Password:</label><input type="password" name="password" required="required"/>
-				<input class="botologin" type="submit" name="login" value="Login" />
-				
+				<input type="text" placeholder="usuario" name="user" required="required" />
+				<input type="password" placeholder="clave" name="password" required="required"/>
+				<input type="submit" name="login" value="Login" />
 			</form>
 		<?php }
 		
@@ -34,77 +36,61 @@
 				<span>
 					Hola 
 					<a href="index.php?controlador=Usuario&operacion=modificacion" title="modificar datos">
-						<?php echo $usuario->nombre;?></a>
-					<span class="mini">
-						<?php echo ' ('.$usuario->email.')';?>
-					</span>
-					<?php if($usuario->admin) echo ', eres administrador';?>
+						<?php echo $usuario->nombre;?>
+					</a><?php if($usuario->admin) echo ', eres administrador';?>
 				</span>
 								
 				<form method="post">
-					<input class="botologin" type="submit" name="logout" value="Logout" />
+					<input type="submit" name="logout" value="Logout" />
 				</form>
-				
-				<div class="clear"></div>
 			</div>
 		<?php }
 		
 		
 		//PONE EL MENU DE LA PAGINA
 		public static function menu($usuario){ ?>
-			<body  >
-			
-		<section class="menuadmin">
-		
-			<div style="text-align: center">
-			
-			<a class="menuinici" href="index.php">Inicio</a>
-			<!-- <ul class="menu"> -->
+			<nav>
+				<ul class="menu">
+					<li><a href="index.php">Inicio</a></li>
+					
+				</ul>
+				<ul class="menu">
 				<?php 
 				//pone el menú del administrador
-				    if($usuario && $usuario->admin){	?>
-					<a  class="menuinici" href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
-					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a>
-					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a>
-				<!-- </ul> -->		
+				if(Login::isAdmin()){	?>
+				
+				<li><a href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a></li>
+				<li><a href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a></li>
+				</ul>		
+				<?php }	?>
+				
+				<?php 
+				//pone el menú del vendedor
+				if($usuario && $usuario->privilegio==2){	?>
+					<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a></li>
+				
 				<?php }	?>
 				
 				
-				<?php
-				//pone el menu del comprador
-				if($usuario && $usuario->privilegio==1){?>
-				<a  class="menuinici" href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
-				<a  class="menuinici" href="index.php?controlador=Marca&operacion=listar">Listado de marcas</a>
-				<a class="menuinici" href="index.php?controlador=Marca&operacion=nuevo">Nueva marca</a>
-				<a class="menuinici" href="index.php?controlador=Vehiculo&operacion=nuevo">Nuevo vehiculo</a>
+				<?php 
+				//pone el menú del comprador
+				if($usuario && $usuario->privilegio==1){	?>
+				<li><a  href="index.php?controlador=Vehiculo&operacion=nuevo">Nuevo vehiculo</a></li>
+				<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a></li>
+				<li><a  href="index.php?controlador=Marca&operacion=nuevo">Nueva Marca</a></li>
+				<li><a href="index.php?controlador=Marca&operacion=listar">Listado de marcas</a></li>
+				<?php }	?>
 				
-				
-				<?php } ?>
-				
-				
-				<?php
-				//pone el menu del vendedor
-				if($usuario && $usuario->privilegio==2){?>
-				><a class="menuinici"  href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
-				>
-				<?php } ?>
-				
-				</div>
-				
-				</section>
-				
-			</body>
+			</nav>
 		<?php }
-		
-		
 		
 		//PONE EL PIE DE PAGINA
 		public static function footer(){	?>
 			<footer>
+				<br/>
 				
-			<p> 
-				<img class="logo" alt="logo web" src="images/logos/logo2.png" />
-				<a href="mailto:magumo19074@gmail.com">Contacto</a>. 
+				<p class="lletres"> Made by </p>
+				<p>	Gloria Pujol y Marc Gumbau
          		</p>
 			</footer>
 		<?php }

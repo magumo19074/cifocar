@@ -8,7 +8,7 @@
 
 
 /* ------------------------------------------------------------------------------------
-RESET DE ESTILO Y REGLAS GENERALES n
+RESET DE ESTILO Y REGLAS GENERALES
 ------------------------------------------------------------------------------------ */
 *{
 	margin: 0px;
@@ -63,10 +63,13 @@ body{
 
 /* HEADER */
 header{
-	padding: 20px;
+	padding: 60px;
 	background-color: #eef;
 	color: white;
 	text-shadow: 1px 1px 3px #99a;
+	background-image:url('../images/logos/fondoheader.jpg');
+	background-repeat:no-repeat;
+	background-size:100%;
 }
 
 header{
@@ -302,9 +305,9 @@ footer{
 	padding: 20px;
 	background-color: #eef;
 	
-	background-image: url('../images/logos/wide.png');
+	background-image: url('../images/logos/gm.png');
 	background-repeat: no-repeat;
-	background-size: 40%;
+	background-size: 15%;
 	background-position: right top;
 }
 
