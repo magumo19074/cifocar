@@ -6,24 +6,30 @@
 			<header>
 				<figure>
 					<a href="index.php">
-						<img alt="Robs Micro Framework logo" src="images/logos/logo.png" />
-					</a>
+						<img alt="car logo" src="images/logos/coche.png" /></a>
 				</figure>
 				<hgroup>
-					<h1>CIFOCAR Valles</h1>
-					<h2>Concesionario de cohes de seguna mano</h2>
+					<h1 class="color">CIFOCAR VALLES</h1>
+				
 				</hgroup>
 			</header>
 		<?php }
 		
 		
 		//PONE EL FORMULARIO DE LOGIN
-		public static function login(){?>
-			<form method="post" id="login" autocomplete="off">
-				<input type="text" placeholder="usuario" name="user" required="required" />
-				<input type="password" placeholder="clave" name="password" required="required"/>
-				<input type="submit" name="login" value="Login" />
+	    public static function login(){?>
+	    
+	    <div class="formlog" style="text-align: center;margin-right:20px">
+	    	
+	    	<form method="post" id="logino" autocomplete="off">
+				<label>User:</label><input type="text" name="user" required="required" /><br/>
+				<label>Password:</label><input type="password" name="password" required="required"/><br/>
+				<input class="botologin" type="submit" name="login" value="Login" />
+				
 			</form>
+	    
+	    </div>
+			
 		<?php }
 		
 		
@@ -33,65 +39,75 @@
 				<span>
 					Hola 
 					<a href="index.php?controlador=Usuario&operacion=modificacion" title="modificar datos">
-						<?php echo $usuario->nombre;?>
-					</a><?php if($usuario->admin) echo ', eres administrador';?>
+						<?php echo $usuario->nombre;?></a>
+					<span class="mini">
+						<?php echo ' ('.$usuario->email.')';?>
+					</span>
+					<?php if($usuario->admin) echo ', eres administrador';?>
 				</span>
 								
 				<form method="post">
-					<input type="submit" name="logout" value="Logout" />
+					<input class="botologin" type="submit" name="logout" value="Logout" />
 				</form>
+				
+				<div class="clear"></div>
 			</div>
 		<?php }
 		
 		
 		//PONE EL MENU DE LA PAGINA
 		public static function menu($usuario){ ?>
-			<nav>
-				<ul class="menu">
-					<li><a href="index.php">Inicio</a></li>
-					<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listar vehiculos</a></li>
-					
-				</ul>
-				<ul class="menu">
+			<body  >
+			
+		<section class="menuadmin">
+		
+			
+			
+			<a class="menuinici" href="index.php">Inicio</a>
+			<section > 
 				<?php 
 				//pone el menú del administrador
-				if(Login::isAdmin()){	?>
-				
-				<li><a href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a></li>
-				<li><a href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a></li>
-					</ul>		
+				    if($usuario && $usuario->admin){	?>
+					<a  class="menuinici" href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
+					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a>
+					<a  class="menuinici" href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a>
+			</section>		
 				<?php }	?>
 				
 				
-				<?php 
-				//pone el menú del comprador
-				if($usuario && $usuario->privilegio==1){	?>
-				<li><a  href="index.php?controlador=Vehiculo&operacion=nuevo">Nuevo vehiculo</a></li>
-				<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a></li>
-				<li><a  href="index.php?controlador=Marca&operacion=nuevo">Nueva Marca</a></li>
-				<li><a href="index.php?controlador=Marca&operacion=listar">Listado de marcas</a></li>
+				<?php
+				//pone el menu del comprador
+				if($usuario && $usuario->privilegio==1){?>
+				<a  class="menuinici" href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
+				<a  class="menuinici" href="index.php?controlador=Marca&operacion=listar">Listado de marcas</a>
+				<a class="menuinici" href="index.php?controlador=Marca&operacion=nuevo">Nueva marca</a>
+				<a class="menuinici" href="index.php?controlador=Vehiculo&operacion=nuevo">Nuevo vehiculo</a>
 				
 				
-					</ul>		
-				<?php }	?>
+				<?php } ?>
 				
-			</nav>
+				
+				<?php
+				//pone el menu del vendedor
+				if($usuario && $usuario->privilegio==2){?>
+				><a class="menuinici"  href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a>
+				>
+				<?php } ?>
+				
+				</div>
+				
+				</section>
+				
+			</body>
 		<?php }
+		
+		
 		
 		//PONE EL PIE DE PAGINA
 		public static function footer(){	?>
 			<footer>
-				<p>
-					<a href="http://recursos.robertsallent.com/mvc/robs_micro_fw_1.0.zip">
-						RobS micro Framework</a> - solo para fines docentes
-				</p>
-				<p> 
-					<a rel="author" href="http://www.robertsallent.com">Robert Sallent</a>
-					<a href="http://www.twitter.com/robertsallent">
-         				<img class="logo" alt="twitter logo" src="images/logos/twitter.png" />
-					</a> -  
-					<a href="https://www.facebook.com/cifovalles">CIFO del Vallès'16</a>. 
-         		</p>
+				
+			
 			</footer>
 		<?php }
 	}
