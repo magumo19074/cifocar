@@ -13,14 +13,14 @@
 					
 				</figure>
 				<hgroup>
-					
+				
 				
 				</hgroup>
 			</header>
 		<?php }
 		
 		
-		//PONE EL FORMULARIO DE LOGIN
+		//PONE EL FORMULARIO DE LOGIN ok
 		public static function login(){?>
 			<form method="post" id="login" autocomplete="off">
 				<input type="text" placeholder="usuario" name="user" required="required" />
@@ -61,6 +61,7 @@
 				
 				<li><a href="index.php?controlador=Usuario&operacion=listar">Listado de usuarios</a></li>
 				<li><a href="index.php?controlador=Usuario&operacion=registro">Nuevo usuario</a></li>
+				<li><a href="index.php?controlador=Vehiculo&operacion=listar">Listado de vehiculos</a></li>
 				</ul>		
 				<?php }	?>
 				

@@ -16,16 +16,16 @@
 			if($usuario) Template::logout($usuario); //pone el formulario de logout
 		 
 			
-			Template::menu($usuario); //pone el menú
+			Template::menu($usuario); //pone el menú de login
 		?>
 
 		<section id="content">
 			<?php if(!$usuario){ ?>
 			
-			<form method="post" id="login" autocomplete="off">
-				<input type="text" placeholder="usuario" name="user" required="required" />
-				<input type="password" placeholder="clave" name="password" required="required"/>
-				<input type="submit" name="login" value="Login" />
+			<form class="portada" method="post" id="login" autocomplete="off">
+				<input class="user" type="text" placeholder="usuario" name="user" required="required" /><br/>
+				<input class="pass" type="password" placeholder="clave" name="password" required="required"/><br/>
+				<input class="botonok" type="submit" name="login" value="Login" />
 			</form>
 			
 			
