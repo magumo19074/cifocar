@@ -18,32 +18,53 @@
 		?>
 		
 		<section id="content">
+		
+		<figure id="imagenjuego" style="float:right">
+		    	<img class="caratula" src="<?php echo $usuarioM->imagen;?>">
+		    	<figcaption style="color:green;text-align:center"><?php echo $usuarioM->user?></figcaption>
+		 </figure>
 			<h2>Borrar un usuario</h2>
 			
 		       <h3>Usuario a eliminar de la base de datos</h3>
             
-            <form method="post">
+            <div class="contenedor">
+				<article class="texto">
+			
+			<h3>Usuario</h3>
+            <p> <?php echo $usuarioM->user;?> </p>
             
-           		 <figure>
-					<img class="imagenactual" src="<?php echo $usuarioM->imagen;?>" 
-						alt="<?php echo  $usuarioM->user;?>" />
-				 </figure>
-				
-				<label>Usuario</label>
-				<input type="text" name="usuario"  value="<?php echo $usuarioM->user;?>" /><br/>
-				<label>Password</label>
-				<input type="text" name="password" value="<?php echo $usuarioM->password;?>" /><br/>
-				<label>Email</label>
-				<input type="text" name="email"  value="<?php echo $usuarioM->email;?>" /><br/>
-				<label>Admin</label>
-				<input type="text" name="admin"  value="<?php echo $usuario->admin;?>" /><br/>
-				<label>Privilegio</label>
-				<input type="text" name="privilegio"  value="<?php echo $usuarioM->privilegio;?>" /><br/>
-				
-				
-				<label>Seguro que quieres borralo?</label>
-				<input  class="botologin" type="submit" name="borrar" value="borrar"/>
-				<input class="botologin" type="button" name="cancelar" value="Cancelar" onclick="history.back()">
+            <h3>Nombre</h3>
+            <p><?php echo $usuarioM->nombre;?></p>
+            
+            <h3>Email</h3>
+            <p><?php echo $usuarioM->email;?></p>
+            
+            <h3>Admin</h3>
+            <p>  <?php if($usuarioM->admin==1)
+                        echo '<p>Adminstrador</p>';
+                      ?>
+                     <?php if($usuarioM->admin==0)
+                          echo '<p>No administrador</p>';
+                       ?>
+            
+           <?php echo '<h3>Privilegio</h3>';
+                  switch($usuarioM->privilegio){
+			        case 0: echo 'Administrador'; break;
+			        case 1: echo 'Responsable de compras'; break;
+			        case 2: echo 'Vendedor'; break;
+			             
+			             }?>
+           
+            
+            <h3>Fecha alta</h3>
+            <p><?php  echo $usuarioM->fecha;?></p>
+            
+            </article>
+           </div>
+           <form method="post">
+				<label>¿Seguro que quieres borrarlo?</label>
+				<input  class="botonok2" type="submit" name="borrar" value="borrar"/>
+				<input class="botonok" type="button" name="cancelar" value="Cancelar" onclick="history.back()">
 			</form><br>
 			
 			<p class="volver" onclick="history.back();">Atrás</p>
